@@ -15,7 +15,7 @@ import axios from "axios";
         });
     };
    onClickSignup = event =>{
-       //event.preventDefault();
+       event.preventDefault();
        
        const { username,email,password } =this.state;
 
@@ -25,7 +25,7 @@ import axios from "axios";
            password
           
        };
-       axios.post('http://localhost:8080/api/v1/users',body);
+       axios.post('/api/v1/users',body);
    };
     render()
     {

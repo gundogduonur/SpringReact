@@ -12,7 +12,7 @@ public class UserController {
 
     private static final Logger log= LoggerFactory.getLogger(UserController.class);
 
-    @CrossOrigin
+    
     @PostMapping("/api/v1/users")
     public void createUser(@RequestBody User user)
     {
