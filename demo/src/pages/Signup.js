@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { signup } from "../api/apiCall";
  class Signup extends React.Component
 {
     state={
@@ -15,7 +15,7 @@ import axios from "axios";
         [name]:value
         });
     };
-   onClickSignup = event =>{
+   onClickSignup = async event =>{
        event.preventDefault();
        
        const { username,email,password } =this.state;
@@ -27,18 +27,19 @@ import axios from "axios";
           
        };
        this.setState({apiCall:true});
-       axios.post('/api/v1/users',body)
-       .then((response) => {
-           this.setState({apiCall:false});
-       })
-       .catch(error => {
-        this.setState({apiCall:false});
-       });
+      try
+      {
+       const response=await signup(body);
+      }
+      catch(error)
+      {
+      }
+      this.setState({apiCall:false});
    };
     render()
     {
+        const {apiCall}=this.state;
         return(
-           
        <div className={"container"} style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
          <form> 
              <h2 className="text-center">Sign up</h2>
@@ -56,8 +57,8 @@ import axios from "axios";
             </div>
 
           <div className="text-center"> 
-          <button className="btn btn-primary" disabled={this.state.apiCall} onClick={this.onClickSignup} style={{margin:10}}>
-              {this.state.apiCall && <span className="spinner-border spinner-border-sm"></span>}
+          <button className="btn btn-primary" disabled={apiCall} onClick={this.onClickSignup} style={{margin:10}}>
+              {apiCall && <span className="spinner-border spinner-border-sm"></span>}
                   Signup
               </button>
           </div>

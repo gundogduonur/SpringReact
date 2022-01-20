@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Signup from './Signup';
+import Signup from './pages/Signup';
 import './bootstrap.scss';
 import reportWebVitals from './reportWebVitals';
 
