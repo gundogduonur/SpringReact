@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @PostMapping("/api/v1/users")
     public void createUser(@RequestBody User user)
     {
-        userRepository.save(user);
+        userService.save(user);
     }
 }
