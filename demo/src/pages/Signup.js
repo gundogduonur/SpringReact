@@ -7,7 +7,9 @@ import { signup } from "../api/apiCall";
      email:null,
      password:null,
      confirmPassword:null,
-     apiCall:false
+     apiCall:false,
+     errors:{
+     }
     };
     onChange = event =>{
         const {name,value}=event.target;
@@ -33,6 +35,7 @@ import { signup } from "../api/apiCall";
       }
       catch(error)
       {
+         this.setState({errors:error.response.data.validationErrors});
       }
       this.setState({apiCall:false});
    };
