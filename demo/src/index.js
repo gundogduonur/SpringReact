@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Signup from './Signup';
+import './bootstrap.scss';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

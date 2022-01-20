@@ -7,6 +7,7 @@ import axios from "axios";
      email:null,
      password:null,
      confirmPassword:null,
+     apiCall:false
     };
     onChange = event =>{
         const {name,value}=event.target;
@@ -25,32 +26,46 @@ import axios from "axios";
            password
           
        };
-       axios.post('/api/v1/users',body);
+       this.setState({apiCall:true});
+       axios.post('/api/v1/users',body)
+       .then((response) => {
+           this.setState({apiCall:false});
+       })
+       .catch(error => {
+        this.setState({apiCall:false});
+       });
    };
     render()
     {
         return(
            
-              
-            <form style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh",flexDirection:"column"}}> 
-           <div style={{margin:"10px"}}>
-               <input name="username" placeholder="Username" style={{width:"15vw",height:"4vh"}} onChange={this.onChange}/>
+       <div className={"container"} style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+         <form> 
+             <h2 className="text-center">Sign up</h2>
+           <div className="form-group">
+               <input name="username" className="form-control"  placeholder="Username"  onChange={this.onChange} style={{margin:10}} />
             </div>
-            <div style={{margin:"10px"}}>
-               <input name="email" placeholder="Email"  style={{width:"15vw",height:"4vh"}} onChange={this.onChange}/>
+            <div className="form-group">
+               <input name="email" className="form-control" placeholder="Email" onChange={this.onChange} style={{margin:10}}/>
             </div>
-            <div style={{margin:"10px"}}>
-               <input name="password" type="password" placeholder="Password" style={{width:"15vw",height:"4vh"}} onChange={this.onChange}/>
+            <div className="form-group">
+               <input name="password" className="form-control" type="password" placeholder="Password"  onChange={this.onChange} style={{margin:10}}/>
             </div>
-            <div style={{margin:"10px"}}>
-               <input name="confirmPassword" type="password" placeholder="Confirm Password"  style={{width:"15vw",height:"4vh"}} onChange={this.onChange}/>
+            <div className="form-group">
+               <input name="confirmPassword" className="form-control" type="password" placeholder="Confirm Password"  onChange={this.onChange} style={{margin:10}}/>
             </div>
-           <div style={{margin:"10px"}}>
-              <button style={{width:"10vw",height:"4vh"}} onClick={this.onClickSignup}>
+
+          <div className="text-center"> 
+          <button className="btn btn-primary" disabled={this.state.apiCall} onClick={this.onClickSignup} style={{margin:10}}>
+              {this.state.apiCall && <span className="spinner-border spinner-border-sm"></span>}
                   Signup
               </button>
-           </div>
+          </div>
+          
+          
            </form>
+              </div>
+           
           
       
         );
