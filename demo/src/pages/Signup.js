@@ -41,13 +41,15 @@ import { signup } from "../api/apiCall";
    };
     render()
     {
-        const {apiCall}=this.state;
+        const {apiCall,errors}=this.state;
+        const {username}=errors;
         return(
        <div className={"container"} style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
          <form> 
              <h2 className="text-center">Sign up</h2>
            <div className="form-group">
-               <input name="username" className="form-control"  placeholder="Username"  onChange={this.onChange} style={{margin:10}} />
+               <input name="username" className={username ? 'form-control is-invalid' : 'form-control'} placeholder="Username"  onChange={this.onChange} style={{margin:10}} />
+               <div className="invalid-feedback">{username}</div>
             </div>
             <div className="form-group">
                <input name="email" className="form-control" placeholder="Email" onChange={this.onChange} style={{margin:10}}/>
